@@ -9,13 +9,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.cineflix.rest.entity.TVSeries;
+import com.cineflix.rest.service.SearchService;
 import com.cineflix.rest.service.TVSeriesService;
 
 @RestController
 @RequestMapping("/series")
 public class TVSeriesController {
-     @Autowired
+    @Autowired
     private TVSeriesService service;
+    
+    @Autowired
+    private SearchService searchService;
 
     @PostMapping("/saveseries")
     public TVSeries saveSeries(@RequestBody TVSeries series) {
@@ -29,12 +33,12 @@ public class TVSeriesController {
 
     @GetMapping("/gettvseries")
     public List<TVSeries> getMoviesByCategory(@RequestParam String category) {
-        return service.getTVSeriesByCategory(category);
+        return searchService.getTVSeriesByCategory(category);
     }
 
     @GetMapping("/search")
     public ResponseEntity<List<TVSeries>> searchTVSeries(@RequestParam String name) {
-        List<TVSeries> tvSeries = service.searchTVSeriesByName(name);
+        List<TVSeries> tvSeries = searchService.searchTVSeriesByName(name);
         return ResponseEntity.ok(tvSeries);
     }
 }

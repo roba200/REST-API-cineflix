@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.cineflix.rest.entity.Movie;
 import com.cineflix.rest.service.MovieService;
+import com.cineflix.rest.service.SearchService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,9 @@ public class MovieController {
     
     @Autowired
     private MovieService service;
+
+    @Autowired
+    private SearchService searchService;
 
     @PostMapping("/savemovie")
     public Movie saveMovie(@RequestBody Movie movie) {
@@ -31,12 +35,12 @@ public class MovieController {
 
     @GetMapping("/getmovies")
     public List<Movie> getMoviesByCategory(@RequestParam String category) {
-        return service.getMoviesByCategory(category);
+        return searchService.getMoviesByCategory(category);
     }
 
     @GetMapping("/search")
     public ResponseEntity<List<Movie>> searchMovies(@RequestParam String name) {
-        List<Movie> movies = service.searchMoviesByName(name);
+        List<Movie> movies = searchService.searchMoviesByName(name);
         return ResponseEntity.ok(movies);
     }
 

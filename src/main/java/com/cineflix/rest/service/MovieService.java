@@ -18,11 +18,5 @@ public class MovieService {
         return repository.findAll();
     }
 
-    public List<Movie> getMoviesByCategory(String category) {
-        return repository.findByCategory(category);
-    }
-
-    public List<Movie> searchMoviesByName(String name) {
-        return repository.findByNameContainingIgnoreCase(name);
-    }
+    
 }

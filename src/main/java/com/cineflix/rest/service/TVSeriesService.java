@@ -18,11 +18,5 @@ public class TVSeriesService {
         return repository.findAll();
     }
 
-    public List<TVSeries> getTVSeriesByCategory(String category) {
-        return repository.findByCategory(category);
-    }
-
-    public List<TVSeries> searchTVSeriesByName(String name) {
-        return repository.findByNameContainingIgnoreCase(name);
-    }
+    
 }
